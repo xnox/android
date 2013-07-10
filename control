@@ -14,6 +14,6 @@ Standards-Version: 3.9.4
 
 Package: android
 Architecture: all
-Depends: ${shlibs:Depends}, ${misc:Depends}, binutils-multiarch
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: android Ubuntu Touch images
  This is an android portion of Ubuntu Touch images.

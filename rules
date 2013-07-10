@@ -1,36 +1,72 @@
 #!/usr/bin/make -f
 # -*- makefile -*-
 
+include /usr/share/dpkg/default.mk
+
 export DH_VERBOSE=1
+
 export http_proxy=http://127.0.9.1:9
 export https_proxy=http://127.0.9.1:9
 
+ifeq ($(wildcard /CurrentlyBuilding),)
+PORTS_URL = http://ports.ubuntu.com
+else
+PORTS_URL = http://ftpmaster.internal
+endif
 
-include /usr/share/dpkg/default.mk
+dist=$(DEB_DISTRIBUTION)
+
+export BUILD_ID=$(dist)
+export BUILD_NUMBER=$(DEB_VERSION)
 
 DEVICES ?= mako maguro manta grouper
+SRC ?= libhybris libplatform-api1-dev
 
-device = $(suffix $@)
+device = $(basename $(notdir $@))
 
 %:
 	dh $@
 
-stamps/device.%: SHELL=/bin/bash
+stamps/chdist:
+	rm -rf repo
+	chdist --data-dir repo --arch armhf create $(dist)
+	cd repo/$(dist) && $(CURDIR)/debian/add_source.py --init $(PORTS_URL) $(dist) --bin $(DEVICES:%=linux-image-%) --src $(SRC)
+	mkdir -p stamps && touch $@
 
-stamps/device.%:
-	mkdir -p stamps
-	set -e; . ./build/envsetup.sh; breakfast $(device); dh_auto_build --parallel bacon
-	touch $@
+stamps/prepare-android: stamps/chdist
+	rm -rf ubuntu/hybris ubuntu/platform-api
+	cp -r repo/$(dist)/libhybris-* ubuntu/hybris
+	rm -rf ubuntu/hybris/.pc
+	cp -r repo/$(dist)/platform-api-* ubuntu/platform-api
+	mkdir -p stamps && touch $@
+
+stamps/%.build: SHELL=/bin/bash
+
+stamps/%.build: stamps/prepare-android
+	#rm -rf out/target/product/$(device)
+	. ./build/envsetup.sh; breakfast $(device); dh_auto_build --parallel -- bacon
+	mkdir -p stamps && touch $@
 
 build: build-arch build-indep
 
-build-arch: $(DEVICES:%=stamps/device.%)
+build-arch: stamps/chdist $(DEVICES:%=stamps/%.build)
 build-indep:
 
 override_dh_auto_clean:
-	rm -rf stamps out
+	rm -rf stamps out repo ubuntu/platform-api ubuntu/hybris debian/install
 
 override_dh_auto_install:
+
+override_dh_install:
+	echo "#!/usr/bin/dh-exec" > debian/install
+	for dev in $(DEVICES); do \
+		echo "out/target/product/$$dev/cm_$$dev-ota-$(DEB_VERSION).zip => usr/share/android/product/$(DEB_DISTRIBUTION)-preinstalled-touch-armel+$$dev.zip" >> debian/install; \
+		for img in boot recovery system; do \
+			echo "out/target/product/$$dev/$$img.img => usr/share/android/product/$(DEB_DISTRIBUTION)-preinstalled-$$img-armel+$$dev.img" >> debian/install; \
+		done; \
+	done
+	chmod +x debian/install
+	dh_install
 
 get-orig-source:
 	fakeroot ./debian/rules clean
