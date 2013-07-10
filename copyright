@@ -1,0 +1,251 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: gcc-arm-linux-androideabi
+
+Files: android/bionic/linker
+Copyright: 2005-2010 The Android Open Source Project <http://source.android.com/source/licenses.html>
+License: BSD-2-clause
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met:
+  * Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  * Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the
+    distribution.
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+ FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+ COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+ BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS
+ OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
+ AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ SUCH DAMAGE.
+
+Files: android/bionic/linker/dlfcn.c android/bionic/libdl/libdl.c
+Copyright: 2007 The Android Open Source Project <http://source.android.com/source/licenses.html>
+License: Apache-2.0
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ .
+       http://www.apache.org/licenses/LICENSE-2.0
+ .
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+
+Files: android/bionic/libthread_db android/bionic/libstdc++ android/bionic/libdl
+Copyright: 2007 The Android Open Source Project <http://source.android.com/source/licenses.html>
+License: BSD-3-clause
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met:
+ 1. Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+ 2. Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+ 3. Neither the name of the project nor the names of its contributors
+    may be used to endorse or promote products derived from this software
+    without specific prior written permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE PROJECT AND CONTRIBUTORS ``AS IS'' AND
+ ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED.  IN NO EVENT SHALL THE PROJECT OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ SUCH DAMAGE.
+
+Files: android/bionic/libm
+Copyright: 2003, Steven G. Kargl
+	   2003 Mike Barcroft <mike@FreeBSD.org>
+	   2002-2005 David Schultz <das@FreeBSD.ORG>
+	   2004 Stefan Farfeleder
+	   2003 Dag-Erling Co�dan Sm�rgrav
+	   1996 The NetBSD Foundation, Inc.
+	   1993,94 Winning Strategies, Inc.
+	   1993 by Sun Microsystems, Inc. All rights reserved.
+	   2004 by Sun Microsystems, Inc. All rights reserved.
+	   2003, Steven G. Kargl
+	   1991 The Regents of the University of California.
+License: BSD-2-clause and BSD-3-clause and BSD-4-clause
+ For all notices see copyright.libm
+
+Files: android/bionic/libc
+Copyright: 2005-2010, The Android Open Source Project
+	   2004 by Internet Systems Consortium, Inc. ("ISC")
+	   1995,1996,1999 by Internet Software Consortium.
+	   1995 by International Business Machines, Inc.
+	   1997, 1998, 1999, 2004 The NetBSD Foundation, Inc.
+	   1993 Christopher G. Demetriou
+	   1983, 1985, 1993 The Regents of the University of California.  All rights reserved.
+	   2000 Ben Harris.
+	   1995, 1996, 1997, and 1998 WIDE Project.
+	   2003 Networks Associates Technology, Inc.
+	   1993 by Digital Equipment Corporation.
+	   1997 Mark Brinicombe
+	   1993 Martin Birgmeier
+	   1996 David Mazieres <dm@lcs.mit.edu>.
+	   1999 Kungliga Tekniska Högskolan
+	   1993 by Sun Microsystems, Inc. All rights reserved.
+	   1997, 2005 Todd C. Miller <Todd.Miller@courtesan.com>
+	   1995, 1996 Carnegie-Mellon University.
+	   2003 Networks Associates Technology, Inc.
+License: BSD-2-clause and BSD-3-clause and BSD-4-clause
+ For all notices see copyright.libc
+
+
+Files: android/build android/Makefile
+Copyright: The Android Open Source Project <http://source.android.com/source/licenses.html>
+License: Apache-2.0
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ .
+       http://www.apache.org/licenses/LICENSE-2.0
+ .
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+
+Files: android/device/linaro/common
+Copyright: 2011-2012 Linaro Limited <http://www.linaro.org/>
+License: Apache-2.0
+ These files are Copyright (C) 2011-2012 Linaro Limited and they
+ are licensed under the Apache License, Version 2.0.
+ You may obtain a copy of this license at
+ http://www.apache.org/licenses/LICENSE-2.0
+
+License:
+
+Files: android/device/linaro/pandaboard
+Copyright: 20122 Linaro Limited <http://www.linaro.org/>
+License: Apache-2.0
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ .
+      http://www.apache.org/licenses/LICENSE-2.0
+ .
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+
+
+Files: android/frameworks/native
+Copyright: 2005-2010 The Android Open Source Project
+	   1999-2006 The Apache Software Foundation
+	   2007 Nuance Communications
+	   1998 - 2009 PacketVideo
+	   2002-2008 by John Cowan
+	   2003-2010 VisualOn
+	   2004-2010 NXP Software
+	   1991-2008 Unicode, Inc
+License: Apache-2.0
+ For all notices see copyright.frameworks.native
+
+Files: android/hardware/ti/omap4xxx
+Copyright: 2010, Texas Instruments Incorporated <http://www.ti.com/>
+	   2011 Trusted Logic
+License: BSD-3-clause and Apache-2.0
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met:
+ .
+ *  Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+ .
+ *  Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+ . 
+ *  Neither the name of Texas Instruments Incorporated nor the names of
+    its contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+Files: android/system/core
+Copyright: 2005-2012 The Android Open Source Project
+	   1989 The Regents of the University of California
+	   1994-1998 Brini
+	   2001 Ben Harris
+	   1994-1997 Mark Brinicombe
+	   1997 Causality Limited
+	   1997 Christos Zoulas
+	   1998 Robert Nordier
+	   2001-2008 Miklos Szeredi <miklos@szeredi.hu>
+	   2003 The NetBSD Foundation, Inc
+	   2006, Brian Swetland <swetland@frotz.net>
+	   2011-2012 Google, Inc
+	   2010, Salvatore Sanfilippo <antirez at gmail dot com>
+License: BSD-2-clause and BSD-3-clause and BSD-4-clause and Apache-2.0
+
+Files: android/system/core/sh/arith.c
+Copyright: 1984, 1989, 1990, 2000, 2001, 2002, 2003, 2004 Free Software Foundation, Inc
+License:
+   A Bison parser, made by GNU Bison 1.875d.
+ .
+   Skeleton parser for Yacc-like parsing with Bison,
+   Copyright (C) 1984, 1989, 1990, 2000, 2001, 2002, 2003, 2004 Free Software Foundation, Inc.
+ .
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2, or (at your option)
+   any later version.
+ .
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+ .
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 59 Temple Place - Suite 330,
+   Boston, MA 02111-1307, USA.  */
+ .
+   As a special exception, when this file is copied by Bison into a
+   Bison output file, you may use that output file without restriction.
+   This special exception was added by the Free Software Foundation
+   in version 1.24 of Bison.
+
+Files: debian/*
+Copyright: 2013 Canonical Ltd
+License: Apache-2.0
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ .
+       http://www.apache.org/licenses/LICENSE-2.0
+ .
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.

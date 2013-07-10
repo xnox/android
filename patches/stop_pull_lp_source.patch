@@ -1,0 +1,10 @@
+--- a/build/envsetup.sh
++++ b/build/envsetup.sh
+@@ -1881,6 +1881,6 @@
+ done
+ unset f
+ 
+-get_hybris
++#get_hybris
+ 
+ addcompletions

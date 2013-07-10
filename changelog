@@ -1,0 +1,5 @@
+android (0.20130709-0ubuntu1) saucy; urgency=low
+
+  * Initial release, android ubuntu touch build.
+
+ -- Dmitrijs Ledkovs <dmitrij.ledkov@ubuntu.com>  Fri, 05 Jul 2013 10:12:24 +0100

@@ -1,0 +1,43 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+export DH_VERBOSE=1
+export http_proxy=http://127.0.9.1:9
+export https_proxy=http://127.0.9.1:9
+
+
+include /usr/share/dpkg/default.mk
+
+DEVICES ?= mako maguro manta grouper
+
+device = $(suffix $@)
+
+%:
+	dh $@
+
+stamps/device.%: SHELL=/bin/bash
+
+stamps/device.%:
+	mkdir -p stamps
+	set -e; . ./build/envsetup.sh; breakfast $(device); dh_auto_build --parallel bacon
+	touch $@
+
+build: build-arch build-indep
+
+build-arch: $(DEVICES:%=stamps/device.%)
+build-indep:
+
+override_dh_auto_clean:
+	rm -rf stamps out
+
+override_dh_auto_install:
+
+get-orig-source:
+	fakeroot ./debian/rules clean
+	-quilt pop -a -f
+	https_proxy='' http_proxy='' pull-lp-source libhybris saucy
+	rm libhybris*tar.gz libhybris*.dsc
+	mv libhybris* ubuntu/hybris
+	tar --exclude-vcs --exclude=debian --exclude=out --transform='s,^,$(DEB_SOURCE)-$(DEB_VERSION_UPSTREAM)/,S' -caf ../$(DEB_SOURCE)_$(DEB_VERSION_UPSTREAM).orig.tar.xz *
+
+.PHONY: build build-arch build-indep

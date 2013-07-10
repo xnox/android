@@ -1,0 +1,19 @@
+Source: android
+Section: restricted/otherosfs
+Priority: extra
+Maintainer: Dmitrijs Ledkovs <xnox@ubuntu.com>
+Build-Depends: debhelper (>= 9),
+  g++-multilib, binutils-multiarch,
+  gnupg, flex, bison, gperf,
+  zip, curl, libncurses5-dev:i386, x11proto-core-dev,
+  libx11-dev:i386, libreadline6-dev:i386, libgl1-mesa-glx:i386,
+  libgl1-mesa-dev, mingw32, tofrodos,
+  python-markdown, libxml2-utils, xsltproc, zlib1g-dev:i386 schedtool
+  patchutils, quilt, lsb-release
+Standards-Version: 3.9.4
+
+Package: android
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}, binutils-multiarch
+Description: android Ubuntu Touch images
+ This is an android portion of Ubuntu Touch images.
