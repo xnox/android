@@ -5,14 +5,16 @@ include /usr/share/dpkg/default.mk
 
 export DH_VERBOSE=1
 
-export http_proxy=http://127.0.9.1:9
-export https_proxy=http://127.0.9.1:9
+#export http_proxy=http://127.0.9.1:9
+#export https_proxy=http://127.0.9.1:9
 
 ifeq ($(wildcard /CurrentlyBuilding),)
 PORTS_URL = http://ports.ubuntu.com
 else
-PORTS_URL = http://ftpmaster.internal
+PORTS_URL = http://ftpmaster.internal/ubuntu
 endif
+
+depends = $(shell chdist --data-dir repo apt-cache $(dist) show linux-image-$(strip $(1)) | sed -n 's/Depends: .*\(linux-image-.*-$(strip $(1))\).*/\1/p')
 
 dist=$(DEB_DISTRIBUTION)
 
@@ -20,7 +22,7 @@ export BUILD_ID=$(dist)
 export BUILD_NUMBER=$(DEB_VERSION)
 
 DEVICES ?= mako maguro manta grouper
-SRC ?= libhybris libplatform-api1-dev
+SRC ?= libhybris platform-api
 
 device = $(basename $(notdir $@))
 
@@ -30,7 +32,20 @@ device = $(basename $(notdir $@))
 stamps/chdist:
 	rm -rf repo
 	chdist --data-dir repo --arch armhf create $(dist)
-	cd repo/$(dist) && $(CURDIR)/debian/add_source.py --init $(PORTS_URL) $(dist) --bin $(DEVICES:%=linux-image-%) --src $(SRC)
+	echo "deb [arch=armhf] $(PORTS_URL) $(dist) main universe restricted multiverse" >> repo/$(dist)/etc/apt/sources.list
+	echo "deb-src $(PORTS_URL) $(dist) main universe restricted multiverse" >> repo/$(dist)/etc/apt/sources.list
+	echo "deb [arch=armhf] $(PORTS_URL) $(dist)-updates main universe restricted multiverse" >> repo/$(dist)/etc/apt/sources.list
+	echo "deb-src $(PORTS_URL) $(dist)-updates main universe restricted multiverse" >> repo/$(dist)/etc/apt/sources.list
+	echo "deb [arch=armhf] $(PORTS_URL) $(dist)-proposed main universe restricted multiverse" >> repo/$(dist)/etc/apt/sources.list
+	echo "deb-src $(PORTS_URL) $(dist)-proposed main universe restricted multiverse" >> repo/$(dist)/etc/apt/sources.list
+	echo "deb [arch=armhf] $(PORTS_URL) $(dist)-security main universe restricted multiverse" >> repo/$(dist)/etc/apt/sources.list
+	echo "deb-src $(PORTS_URL) $(dist)-security main universe restricted multiverse" >> repo/$(dist)/etc/apt/sources.list
+	chdist --data-dir $(CURDIR)/repo --arch armhf apt-get $(dist) update
+	cd repo/$(dist) && chdist --data-dir $(CURDIR)/repo --arch armhf apt-get $(dist) source $(SRC)
+	mkdir -p stamps && touch $@
+
+stamps/%.fetch: stamps/chdist
+	cd repo/$(dist) && chdist --data-dir $(CURDIR)/repo apt-get $(dist) download $(call depends, $(device))
 	mkdir -p stamps && touch $@
 
 stamps/prepare-android: stamps/chdist
@@ -40,11 +55,18 @@ stamps/prepare-android: stamps/chdist
 	cp -r repo/$(dist)/platform-api-* ubuntu/platform-api
 	mkdir -p stamps && touch $@
 
+
 stamps/%.build: SHELL=/bin/bash
 
-stamps/%.build: stamps/prepare-android
-	#rm -rf out/target/product/$(device)
+stamps/%.build: stamps/prepare-android stamps/%.fetch
+	rm -rf out/target/product/$(device)/*.img
+	rm -rf out/target/product/$(device)/*.zip
 	. ./build/envsetup.sh; breakfast $(device); dh_auto_build --parallel -- bacon
+	cd out/target/product/$(device) && \
+		mv boot.img boot-legacy.img && \
+		mv ubuntu-boot.img boot.img && \
+		cp cm_$(device)-ota-$(DEB_VERSION).zip cm_$(device)-ota-$(DEB_VERSION)-legacy.zip && \
+		zip -u cm_$(device)-ota-$(DEB_VERSION).zip boot.img
 	mkdir -p stamps && touch $@
 
 build: build-arch build-indep
@@ -61,19 +83,21 @@ override_dh_install:
 	echo "#!/usr/bin/dh-exec" > debian/install
 	for dev in $(DEVICES); do \
 		echo "out/target/product/$$dev/cm_$$dev-ota-$(DEB_VERSION).zip => usr/share/android/product/$(DEB_DISTRIBUTION)-preinstalled-touch-armel+$$dev.zip" >> debian/install; \
-		for img in boot recovery system; do \
-			echo "out/target/product/$$dev/$$img.img => usr/share/android/product/$(DEB_DISTRIBUTION)-preinstalled-$$img-armel+$$dev.img" >> debian/install; \
-		done; \
+		echo "out/target/product/$$dev/cm_$$dev-ota-$(DEB_VERSION)-legacy.zip => usr/share/android/product/$(DEB_DISTRIBUTION)-preinstalled-armel+$$dev.zip" >> debian/install; \
+		echo "out/target/product/$$dev/boot.img => usr/share/android/product/$(DEB_DISTRIBUTION)-preinstalled-boot-armhf+$$dev.img" >> debian/install; \
+		echo "out/target/product/$$dev/boot-legacy.img => usr/share/android/product/$(DEB_DISTRIBUTION)-preinstalled-boot-armel+$$dev.img" >> debian/install; \
+		echo "out/target/product/$$dev/recovery.img => usr/share/android/product/$(DEB_DISTRIBUTION)-preinstalled-recovery-armel+$$dev.img" >> debian/install; \
+		echo "out/target/product/$$dev/system.img => usr/share/android/product/$(DEB_DISTRIBUTION)-preinstalled-system-armel+$$dev.img" >> debian/install; \
 	done
 	chmod +x debian/install
 	dh_install
 
+override_dh_builddeb:
+	dh_builddeb -- -Zxz
+
 get-orig-source:
 	fakeroot ./debian/rules clean
 	-quilt pop -a -f
-	https_proxy='' http_proxy='' pull-lp-source libhybris saucy
-	rm libhybris*tar.gz libhybris*.dsc
-	mv libhybris* ubuntu/hybris
-	tar --exclude-vcs --exclude=debian --exclude=out --transform='s,^,$(DEB_SOURCE)-$(DEB_VERSION_UPSTREAM)/,S' -caf ../$(DEB_SOURCE)_$(DEB_VERSION_UPSTREAM).orig.tar.xz *
+	tar --exclude-vcs --transform='s,^,$(DEB_SOURCE)-$(DEB_VERSION_UPSTREAM)/,S' -caf ../$(DEB_SOURCE)_$(DEB_VERSION_UPSTREAM).orig.tar.xz $(filter-out debian, $(wildcard *))
 
 .PHONY: build build-arch build-indep

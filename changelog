@@ -1,3 +1,21 @@
+android (0.20130709-0ubuntu4) saucy; urgency=low
+
+  * Ditch python... host arch gets in the way?
+
+ -- Dmitrijs Ledkovs <dmitrij.ledkov@ubuntu.com>  Thu, 11 Jul 2013 11:19:42 +0100
+
+android (0.20130709-0ubuntu3) saucy; urgency=low
+
+  * Fix sources....
+
+ -- Dmitrijs Ledkovs <dmitrij.ledkov@ubuntu.com>  Thu, 11 Jul 2013 10:11:29 +0100
+
+android (0.20130709-0ubuntu2) saucy; urgency=low
+
+  * Fix url.
+
+ -- Dmitrijs Ledkovs <dmitrij.ledkov@ubuntu.com>  Thu, 11 Jul 2013 09:25:28 +0100
+
 android (0.20130709-0ubuntu1) saucy; urgency=low
 
   * Initial release, android ubuntu touch build.
