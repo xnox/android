@@ -1,0 +1,58 @@
+--- a/external/expat/Android.mk
++++ b/external/expat/Android.mk
+@@ -69,7 +69,7 @@
+ include $(CLEAR_VARS)
+ 
+ ifeq ($(TARGET_ARCH),arm)
+-LOCAL_SDK_VERSION := 8
++LOCAL_SDK_VERSION := 9
+ endif
+ 
+ LOCAL_SRC_FILES := $(common_SRC_FILES)
+@@ -86,7 +86,7 @@
+ include $(CLEAR_VARS)
+ 
+ ifeq ($(TARGET_ARCH),arm)
+-LOCAL_SDK_VERSION := 8
++LOCAL_SDK_VERSION := 9
+ endif
+ 
+ LOCAL_SRC_FILES := $(common_SRC_FILES)
+--- a/external/protobuf/Android.mk
++++ b/external/protobuf/Android.mk
+@@ -127,7 +127,7 @@
+ 
+ LOCAL_MODULE := libprotobuf-java-2.3.0-micro
+ LOCAL_MODULE_TAGS := optional
+-LOCAL_SDK_VERSION := 8
++LOCAL_SDK_VERSION := 9
+ 
+ LOCAL_SRC_FILES := $(call all-java-files-under, java/src/main/java/com/google/protobuf/micro)
+ 
+@@ -150,7 +150,7 @@
+ 
+ LOCAL_MODULE := libprotobuf-java-2.3.0-lite
+ LOCAL_MODULE_TAGS := optional
+-LOCAL_SDK_VERSION := 8
++LOCAL_SDK_VERSION := 9
+ 
+ LOCAL_SRC_FILES := $(JAVA_LITE_SRC_FILES)
+ 
+@@ -198,7 +198,7 @@
+ 
+ # These are the minimum versions and don't need to be update.
+ ifeq ($(TARGET_ARCH),arm)
+-LOCAL_SDK_VERSION := 8
++LOCAL_SDK_VERSION := 9
+ else
+ # x86/mips support only available from API 9.
+ LOCAL_SDK_VERSION := 9
+@@ -263,7 +263,7 @@
+ 
+ # These are the minimum versions and don't need to be update.
+ ifeq ($(TARGET_ARCH),arm)
+-LOCAL_SDK_VERSION := 8
++LOCAL_SDK_VERSION := 9
+ else
+ # x86/mips support only available from API 9.
+ LOCAL_SDK_VERSION := 9

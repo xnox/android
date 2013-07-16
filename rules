@@ -54,6 +54,8 @@ stamps/prepare-android: stamps/chdist
 	cp -r repo/$(dist)/libhybris-* ubuntu/hybris
 	rm -rf ubuntu/hybris/.pc
 	cp -r repo/$(dist)/platform-api-* ubuntu/platform-api
+	rm -rf $(filter-out vendor/cm, $(wildcard vendor/*))
+	cp -r /usr/src/android/vendor/* vendor/
 	mkdir -p stamps && touch $@
 
 
@@ -76,7 +78,8 @@ build-arch: stamps/chdist $(DEVICES:%=stamps/%.build)
 build-indep:
 
 override_dh_auto_clean:
-	rm -rf stamps out repo ubuntu/platform-api ubuntu/hybris debian/install
+	rm -rf stamps out repo ubuntu/platform-api ubuntu/hybris debian/intall $(filter-out vendor/cm, $(wildcard vendor/*))
+	rm -rf vendor/cm/prebuilt/common/media/audio vendor/cm/overlay vendor/cm/prebuilt/common/bootanimation/[2-6]*.zip
 
 override_dh_auto_install:
 
@@ -99,6 +102,6 @@ override_dh_builddeb:
 get-orig-source:
 	fakeroot ./debian/rules clean
 	-quilt pop -a -f
-	tar --exclude-vcs --transform='s,^,$(DEB_SOURCE)-$(DEB_VERSION_UPSTREAM)/,S' -caf ../$(DEB_SOURCE)_$(DEB_VERSION_UPSTREAM).orig.tar.xz $(filter-out debian prebuilts, $(wildcard *)) prebuilts/misc prebuilts/ndk/current prebuilts/ndk/8 prebuilts/ndk/*.mk prebuilts/tools prebuilts/qemu-kernel/*/LINUX_KERNEL_COPYING
+	tar --exclude-vcs --transform='s,^,$(DEB_SOURCE)-$(DEB_VERSION_UPSTREAM)/,S' -caf ../$(DEB_SOURCE)_$(DEB_VERSION_UPSTREAM).orig.tar.xz $(filter-out debian prebuilts vendor development tools, $(wildcard *)) prebuilts/misc prebuilts/ndk/current prebuilts/ndk/8/sources/ prebuilts/ndk/8/platforms/android-9 prebuilts/ndk/*.mk prebuilts/tools prebuilts/qemu-kernel/*/LINUX_KERNEL_COPYING vendor/cm
 
 .PHONY: build build-arch build-indep
