@@ -42,6 +42,7 @@ stamps/chdist:
 	echo "deb-src $(PORTS_URL) $(dist)-security main universe restricted multiverse" >> repo/$(dist)/etc/apt/sources.list
 	chdist --data-dir $(CURDIR)/repo --arch armhf apt-get $(dist) update
 	cd repo/$(dist) && chdist --data-dir $(CURDIR)/repo --arch armhf apt-get $(dist) source $(SRC)
+	cd repo/$(dist) && chdist --data-dir $(CURDIR)/repo --arch armhf apt-get $(dist) download ubuntu-touch-generic-initrd  initramfs-tools-ubuntu-touch
 	mkdir -p stamps && touch $@
 
 stamps/%.fetch: stamps/chdist
@@ -61,7 +62,7 @@ stamps/%.build: SHELL=/bin/bash
 stamps/%.build: stamps/prepare-android stamps/%.fetch
 	rm -rf out/target/product/$(device)/*.img
 	rm -rf out/target/product/$(device)/*.zip
-	. ./build/envsetup.sh; breakfast $(device); dh_auto_build --parallel -- bacon
+	. ./build/envsetup.sh; breakfast $(device); dh_auto_build --parallel -- bacon showcommands
 	cd out/target/product/$(device) && \
 		mv boot.img boot-legacy.img && \
 		mv ubuntu-boot.img boot.img && \
@@ -98,6 +99,6 @@ override_dh_builddeb:
 get-orig-source:
 	fakeroot ./debian/rules clean
 	-quilt pop -a -f
-	tar --exclude-vcs --transform='s,^,$(DEB_SOURCE)-$(DEB_VERSION_UPSTREAM)/,S' -caf ../$(DEB_SOURCE)_$(DEB_VERSION_UPSTREAM).orig.tar.xz $(filter-out debian, $(wildcard *))
+	tar --exclude-vcs --transform='s,^,$(DEB_SOURCE)-$(DEB_VERSION_UPSTREAM)/,S' -caf ../$(DEB_SOURCE)_$(DEB_VERSION_UPSTREAM).orig.tar.xz $(filter-out debian prebuilts, $(wildcard *)) prebuilts/misc prebuilts/ndk/current prebuilts/ndk/8 prebuilts/ndk/*.mk prebuilts/tools prebuilts/qemu-kernel/*/LINUX_KERNEL_COPYING
 
 .PHONY: build build-arch build-indep

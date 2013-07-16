@@ -1,2 +1,3 @@
 stop_pull_lp_source.patch
 use_local_kernel.diff
+board_config.patch

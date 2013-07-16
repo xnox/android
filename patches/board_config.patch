@@ -1,0 +1,8 @@
+--- a/device/asus/grouper/BoardConfigCommon.mk
++++ b/device/asus/grouper/BoardConfigCommon.mk
+@@ -90,3 +90,5 @@
+ TARGET_KERNEL_UBUNTU := true
+ TARGET_KERNEL_UBUNTU_META := linux-image-grouper
+ TARGET_KERNEL_UBUNTU_SERIES := saucy
++
++BOARD_KERNEL_CMDLINE := console=tty1

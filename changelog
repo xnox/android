@@ -1,3 +1,11 @@
+android (0.20130715-0ubuntu5) saucy; urgency=low
+
+  * New upstream release. Updated tree.
+  * Ditch prebuilt/sdk and prebuilt/ndk from the original tarball
+  * Create both flipped & unflipped boot images and system zips.
+
+ -- Dmitrijs Ledkovs <dmitrij.ledkov@ubuntu.com>  Mon, 15 Jul 2013 11:37:00 +0100
+
 android (0.20130709-0ubuntu4) saucy; urgency=low
 
   * Ditch python... host arch gets in the way?
