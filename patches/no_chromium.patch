@@ -1,0 +1,30 @@
+--- a/build/target/product/base.mk
++++ b/build/target/product/base.mk
+@@ -61,7 +61,6 @@
+     libc \
+     libcamera_client \
+     libcameraservice \
+-    libchromium_net \
+     libctest \
+     libcutils \
+     libdbus \
+--- a/build/target/product/core.mk
++++ b/build/target/product/core.mk
+@@ -97,7 +97,6 @@
+     libsqlite_jni \
+     libssl \
+     libstagefright \
+-    libstagefright_chromium_http \
+     libstagefright_soft_aacdec \
+     libstagefright_soft_aacenc \
+     libstagefright_soft_amrdec \
+--- a/build/target/product/mini.mk
++++ b/build/target/product/mini.mk
+@@ -120,7 +120,6 @@
+     libsqlite_jni \
+     libssl \
+     libstagefright \
+-    libstagefright_chromium_http \
+     libstagefright_soft_aacdec \
+     libstagefright_soft_aacenc \
+     libstagefright_soft_amrdec \
