@@ -102,6 +102,6 @@ override_dh_builddeb:
 get-orig-source:
 	fakeroot ./debian/rules clean
 	-quilt pop -a -f
-	tar --exclude-vcs --transform='s,^,$(DEB_SOURCE)-$(DEB_VERSION_UPSTREAM)/,S' -caf ../$(DEB_SOURCE)_$(DEB_VERSION_UPSTREAM).orig.tar.xz $(filter-out debian prebuilts vendor development tools, $(wildcard *)) prebuilts/ndk/current prebuilts/ndk/8/sources/ prebuilts/ndk/8/platforms/android-9/arch-arm prebuilts/ndk/*.mk prebuilts/qemu-kernel/*/LINUX_KERNEL_COPYING vendor/cm
+	tar --exclude-vcs --transform='s,^,$(DEB_SOURCE)-$(DEB_VERSION_UPSTREAM)/,S' -caf ../$(DEB_SOURCE)_$(DEB_VERSION_UPSTREAM).orig.tar.xz $(filter-out debian prebuilts vendor, $(wildcard *)) prebuilts/qemu-kernel/*/LINUX_KERNEL_COPYING vendor/cm
 
 .PHONY: build build-arch build-indep

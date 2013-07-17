@@ -1,6 +1,7 @@
-android (0.20130716-0ubuntu6) saucy; urgency=low
+android (0.20130717-0ubuntu6) saucy; urgency=low
 
   * Drop vendor blobs, and build-dep on them instead. Never changing.
+  * Drop chromium, loads of prebuilts and ndk.
 
  -- Dmitrijs Ledkovs <dmitrij.ledkov@ubuntu.com>  Tue, 16 Jul 2013 13:13:15 +0100
 

@@ -1,3 +1,2 @@
 extend-diff-ignore=.repo/*
-extend-diff-ignore=prebuilts/ndk/*
 extend-diff-ignore=prebuilts/qemu-kernel/*
