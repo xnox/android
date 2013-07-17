@@ -28,3 +28,27 @@
      libstagefright_soft_aacdec \
      libstagefright_soft_aacenc \
      libstagefright_soft_amrdec \
+--- a/frameworks/av/media/libstagefright/Android.mk
++++ b/frameworks/av/media/libstagefright/Android.mk
+@@ -132,9 +132,9 @@
+         libstagefright_id3 \
+         libFLAC \
+ 
+-LOCAL_SRC_FILES += \
+-        chromium_http_stub.cpp
+-LOCAL_CPPFLAGS += -DCHROMIUM_AVAILABLE=1
++#LOCAL_SRC_FILES += \
++#        chromium_http_stub.cpp
++#LOCAL_CPPFLAGS += -DCHROMIUM_AVAILABLE=1
+ 
+ LOCAL_SHARED_LIBRARIES += libstlport
+ include external/stlport/libstlport.mk
+--- a/frameworks/av/media/libstagefright/chromium_http/Android.mk
++++ b/frameworks/av/media/libstagefright/chromium_http/Android.mk
+@@ -32,5 +32,5 @@
+ 
+ LOCAL_MODULE_TAGS := optional
+ 
+-include $(BUILD_SHARED_LIBRARY)
++#include $(BUILD_SHARED_LIBRARY)
+ endif
