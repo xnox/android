@@ -1,5 +1,5 @@
 Source: android
-Section: restricted/otherosfs
+Section: non-free/otherosfs
 Priority: extra
 Maintainer: Dmitrijs Ledkovs <xnox@ubuntu.com>
 Build-Depends: debhelper (>= 9),

@@ -80,6 +80,7 @@ build-indep:
 override_dh_auto_clean:
 	rm -rf stamps out repo ubuntu/platform-api ubuntu/hybris debian/intall $(filter-out vendor/cm, $(wildcard vendor/*))
 	rm -rf vendor/cm/prebuilt/common/media/audio vendor/cm/overlay vendor/cm/prebuilt/common/bootanimation/[2-6]*.zip
+	rm -rf debian/$(DEB_SOURCE).copyright
 
 override_dh_auto_install:
 
@@ -96,12 +97,23 @@ override_dh_install:
 	chmod +x debian/install
 	dh_install
 
+override_dh_installdocs:
+	make -f debian/rules copyright COPYRIGHT_ALL=True
+	dh_installdocs
+
 override_dh_builddeb:
 	dh_builddeb -- -Zxz
 
+SOURCES=$(filter-out debian prebuilts vendor, $(wildcard *)) prebuilts/qemu-kernel/*/LINUX_KERNEL_COPYING vendor/cm
+
 get-orig-source:
 	fakeroot ./debian/rules clean
+	make -f debian/rules copyright
 	-quilt pop -a -f
-	tar --exclude-vcs --transform='s,^,$(DEB_SOURCE)-$(DEB_VERSION_UPSTREAM)/,S' -caf ../$(DEB_SOURCE)_$(DEB_VERSION_UPSTREAM).orig.tar.xz $(filter-out debian prebuilts vendor, $(wildcard *)) prebuilts/qemu-kernel/*/LINUX_KERNEL_COPYING vendor/cm
+	tar --exclude-vcs --transform='s,^,$(DEB_SOURCE)-$(DEB_VERSION_UPSTREAM)/,S' -caf ../$(DEB_SOURCE)_$(DEB_VERSION_UPSTREAM).orig.tar.xz $(SOURCES)
 
-.PHONY: build build-arch build-indep
+copyright:
+	cp debian/copyright.header debian/copyright
+	find $(if $(COPYRIGHT_ALL),.,$(SOURCES)) -name NOTICE | xargs -L1 ./debian/notice.sh >> $(if $(COPYRIGHT_ALL),debian/$(DEB_SOURCE).copyright,debian/copyright)
+
+.PHONY: build build-arch build-indep get-orig-source copyright

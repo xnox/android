@@ -1,0 +1,40 @@
+--- a/build/core/Makefile
++++ b/build/core/Makefile
+@@ -1201,7 +1201,6 @@
+ 	$(call intermediates-dir-for,EXECUTABLES,applypatch)/applypatch \
+ 	$(call intermediates-dir-for,EXECUTABLES,applypatch_static)/applypatch_static \
+ 	$(call intermediates-dir-for,EXECUTABLES,check_prereq)/check_prereq \
+-	$(call intermediates-dir-for,EXECUTABLES,sqlite3)/sqlite3 \
+ 	$(call intermediates-dir-for,EXECUTABLES,updater)/updater
+ $(BUILT_TARGET_FILES_PACKAGE): PRIVATE_OTA_TOOLS := $(built_ota_tools)
+ 
+--- a/build/target/product/base.mk
++++ b/build/target/product/base.mk
+@@ -93,7 +93,6 @@
+     libskia \
+     libsonivox \
+     libsoundpool \
+-    libsqlite \
+     libstagefright \
+     libstagefright_amrnb_common \
+     libstagefright_avc_common \
+--- a/build/target/product/core.mk
++++ b/build/target/product/core.mk
+@@ -94,7 +94,6 @@
+     libportable \
+     libpowermanager \
+     libspeexresampler \
+-    libsqlite_jni \
+     libssl \
+     libstagefright \
+     libstagefright_soft_aacdec \
+--- a/build/target/product/mini.mk
++++ b/build/target/product/mini.mk
+@@ -117,7 +117,6 @@
+     libportable \
+     libpowermanager \
+     libspeexresampler \
+-    libsqlite_jni \
+     libssl \
+     libstagefright \
+     libstagefright_soft_aacdec \

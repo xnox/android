@@ -3,3 +3,4 @@ stop_pull_lp_source.patch
 use_local_kernel.diff
 board_config.patch
 use-ndk-8.patch
+no-sqlite3.patch

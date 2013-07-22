@@ -1,3 +1,15 @@
+android (0.20130722-0ubuntu8) saucy; urgency=low
+
+  * Use proper copyrights.
+
+ -- Dmitrijs Ledkovs <dmitrij.ledkov@ubuntu.com>  Mon, 22 Jul 2013 14:58:47 +0100
+
+android (0.20130722-0ubuntu7) saucy; urgency=low
+
+  * Drop sqlite3, update android sources.
+
+ -- Dmitrijs Ledkovs <dmitrij.ledkov@ubuntu.com>  Mon, 22 Jul 2013 10:58:26 +0100
+
 android (0.20130717-0ubuntu6) saucy; urgency=low
 
   * Drop vendor blobs, and build-dep on them instead. Never changing.
