@@ -1,3 +1,10 @@
+android (0.20130723-0ubuntu9) saucy; urgency=low
+
+  * Update source tree to include recovery fixes.
+  * Rebuild against android-src-vendor with updated NOTICE files.
+
+ -- Dmitrijs Ledkovs <dmitrij.ledkov@ubuntu.com>  Tue, 23 Jul 2013 12:36:42 +0100
+
 android (0.20130722-0ubuntu8) saucy; urgency=low
 
   * Use proper copyrights.
